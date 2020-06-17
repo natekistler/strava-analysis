@@ -1,0 +1,20 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import datetime as dt
+import json
+import ast
+import polyline
+
+data = pd.read_csv(r'Data Files/strava_data_clean.csv')
+data = data[data['type'] == 'Ride']
+#data = data[data['gear_id'] == 'Canyon Endurace CF SL 7.0']
+
+
+print(polyline.decode(data.loc[1, 'summary_polyline']))
+
+sns.scatterplot(x='average_speed [mph]', y='average_cadence', data=data, hue='gear_id')
+plt.show()
+
+sns.boxplot(x='start_date_local_time_of_day', y='average_heartrate', data=data)
+plt.show()
